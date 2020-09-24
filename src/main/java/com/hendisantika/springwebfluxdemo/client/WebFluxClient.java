@@ -1,6 +1,8 @@
 package com.hendisantika.springwebfluxdemo.client;
 
+import com.hendisantika.springwebfluxdemo.model.Resource;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,5 +25,19 @@ public class WebFluxClient {
     public WebClient openConnection(String url) {
         client = WebClient.create(url);
         return client;
+    }
+
+    /**
+     * Request single resource
+     *
+     * @param id
+     */
+    public void getResourceById(String id) {
+        Mono<Resource> result = client.get()
+                .uri("/resource/{id}", "1")
+                .retrieve()
+                .bodyToMono(Resource.class);
+
+        result.subscribe(System.out::println);
     }
 }
