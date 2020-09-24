@@ -7,7 +7,7 @@ spring:
       host: localhost
       port: 27017
       database: testDatabase
-      authentication-database: admin
-      username: root
-      password: root
+#      authentication-database: admin
+#      username: root
+#      password: root
 
