@@ -2,6 +2,7 @@ package com.hendisantika.springwebfluxdemo.client;
 
 import com.hendisantika.springwebfluxdemo.model.Resource;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -37,6 +38,18 @@ public class WebFluxClient {
                 .uri("/resource/{id}", "1")
                 .retrieve()
                 .bodyToMono(Resource.class);
+
+        result.subscribe(System.out::println);
+    }
+
+    /**
+     * Request a collection
+     */
+    public void getAllResources() {
+        Flux<Resource> result = client.get()
+                .uri("/resource")
+                .retrieve()
+                .bodyToFlux(Resource.class);
 
         result.subscribe(System.out::println);
     }
